@@ -19,6 +19,7 @@ services:
     scaling:
       minInstances: 1
       maxInstances: 3
+      targetCPUPercent: 80
     # healthCheckPath: /health
     envVars:
       - key: NODE_ENV
