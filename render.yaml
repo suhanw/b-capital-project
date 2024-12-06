@@ -16,10 +16,10 @@ services:
     name: chatbot-server
     runtime: docker
     dockerfilePath: ./server/Dockerfile
-    scaling:
-      minInstances: 1
-      maxInstances: 3
-      targetCPUPercent: 80
+    # scaling:
+    #   minInstances: 1
+    #   maxInstances: 3
+    #   targetCPUPercent: 80
     # healthCheckPath: /health
     envVars:
       - key: NODE_ENV
