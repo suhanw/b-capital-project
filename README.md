@@ -98,11 +98,9 @@ The application uses OpenAI's GPT model for generating responses, with a abstrac
 
 ## Security
 
-- Session-based authentication
+### Session-based Authentication
+
 - Secure password hashing in data store
-
-### Session Management
-
 - Redis for temporary session storage
 - Secure cookie configuration
 
