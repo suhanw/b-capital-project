@@ -23,6 +23,7 @@ export class SinglePageApp {
         <!DOCTYPE html>
         <html>
           <head>
+            <link rel="icon" href="${process.env.FAVICON_URL}" />
             <title>My Chatbot</title>
           </head>
           <body>
