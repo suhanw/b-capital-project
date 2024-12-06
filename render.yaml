@@ -12,6 +12,33 @@ services:
       - key: NODE_ENV
         value: production
 
+  - type: web
+    name: chatbot-server
+    runtime: docker
+    dockerfilePath: ./server/Dockerfile
+    scaling:
+      minInstances: 1
+      maxInstances: 3
+    # healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 80
+      - key: REDIS_URI
+        fromService:
+          type: redis
+          name: chatbot-cache
+          property: connectionString
+      - key: MONGODB_URI
+        value: mongodb://data:27017/chatbotdb
+      - key: CLIENT_MANIFEST_URL
+        value: https://chatbot-client-q9me.onrender.com/manifest.json
+      - key: COOKIE_SECRET
+        sync: false # Prompt for a value in the Render Dashboard
+      - key: OPENAI_API_KEY
+        sync: false # Prompt for a value in the Render Dashboard
+
   - type: redis
     name: chatbot-cache
     ipAllowList: [] # Only allow internal connections
