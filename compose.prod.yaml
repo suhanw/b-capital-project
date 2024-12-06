@@ -1,0 +1,69 @@
+services:
+  client:
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+      target: dependencies # For development, use the dependencies stage
+    volumes:
+      - ./client:/usr/src/app/client
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
+    ports:
+      - 8080:8080
+    environment:
+      NODE_ENV: production
+      CLIENT_PORT: 8080
+    # command: npm run dev:client
+    command: ./node_modules/.bin/webpack serve --config client/webpack.js --no-client-overlay --no-hot --no-live-reload
+    depends_on:
+      server:
+        condition: service_started
+
+  server:
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+      # target: dependencies # For development, use the dependencies stage
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
+    ports:
+      - 3000:3000
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      MONGODB_URI: mongodb://data:27017/chatbotdb
+      REDIS_URI: redis://cache:6379
+      COOKIE_SECRET: my-cookie-secret
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    depends_on:
+      data:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    # command: npm run dev:server
+
+  data:
+    image: mongo:latest
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+
+  cache:
+    image: redis:latest
+    volumes:
+      - ./cache/db:/data
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
