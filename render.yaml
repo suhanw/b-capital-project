@@ -1,10 +1,13 @@
 services:
   # Web service for the client (Static Site)
-  - type: static
+  - type: web
     name: chatbot-client
-    env: static
+    runtime: static
     buildCommand: npm ci --include=dev && npm run build:client
     staticPublishPath: ./dist
+    buildFilter:
+      paths: # Only trigger a build with changes to these files
+      - client/**/*
     envVars:
       - key: NODE_ENV
         value: production
