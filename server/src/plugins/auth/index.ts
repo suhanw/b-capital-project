@@ -30,7 +30,7 @@ export class Auth {
     app.use(
       session({
         store,
-        secret: process.env.COOKIE_SECRET,
+        secret: process.env.COOKIE_SECRET!,
         resave: false, // https://github.com/expressjs/session?tab=readme-ov-file#resave
         saveUninitialized: false, // https://github.com/expressjs/session?tab=readme-ov-file#saveuninitialized
         cookie: {
