@@ -181,5 +181,6 @@ const cookieOptions = {
 
 ### Monitoring
 
+- Add more structure to logging and error handling/reporting
 - Implement o11y tools (e.g., Datadog)
 - Monitor compute/storage metrics, logs, and traces
