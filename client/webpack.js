@@ -40,7 +40,7 @@ const config = {
     ? {
         hot: false,
         liveReload: true,
-        port: process.env.CLIENT_PORT || 8080,
+        port: process.env.CLIENT_PORT,
         headers: {
           "Access-Control-Allow-Origin": "*",
         },

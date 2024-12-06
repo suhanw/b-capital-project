@@ -1,4 +1,4 @@
 node_modules
 dist
-data/db
-cache/db
+mongodb_data
+redis_data

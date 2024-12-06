@@ -46,7 +46,7 @@ services:
   data:
     image: mongo:latest
     volumes:
-      - ./data/db:/data/db
+      - ./data/mongodb_data:/data/db
     ports:
       - 27017:27017
     healthcheck:
@@ -58,7 +58,7 @@ services:
   cache:
     image: redis:latest
     volumes:
-      - ./cache/db:/data
+      - ./cache/redis_data:/data
     ports:
       - 6379:6379
     healthcheck:

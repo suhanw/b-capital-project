@@ -32,4 +32,6 @@
 **/dist
 LICENSE
 README.md
-data/db
+
+mongodb_data
+redis_data

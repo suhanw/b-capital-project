@@ -7,6 +7,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import App from "./components/App";
 import { store } from "./store";
 
+console.log("NODE_ENV", process.env.NODE_ENV);
+
 const theme = createTheme({
   palette: {
     primary: {

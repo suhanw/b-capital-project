@@ -16,5 +16,6 @@ new SinglePageApp(app);
 
 const server = app.listen(process.env.PORT);
 server.on("listening", () => {
+  console.log("NODE_ENV", process.env.NODE_ENV);
   console.log("Server running on", server.address());
 });
