@@ -30,13 +30,13 @@ export class Auth {
     app.use(
       session({
         store,
-        secret: process.env.COOKIE_SECRET || "somesecret",
+        secret: process.env.COOKIE_SECRET,
         resave: false, // https://github.com/expressjs/session?tab=readme-ov-file#resave
         saveUninitialized: false, // https://github.com/expressjs/session?tab=readme-ov-file#saveuninitialized
         cookie: {
           signed: true,
           httpOnly: true,
-          // secure: process.env.NODE_ENV === "production",
+          secure: process.env.NODE_ENV === "production",
           maxAge: 1000 * 60 * 60 * 24,
           sameSite: "strict",
           path: "/",
