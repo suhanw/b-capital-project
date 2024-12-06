@@ -80,7 +80,7 @@ The application uses OpenAI's GPT model for generating responses, with a abstrac
 - Separate slices for data and UI states
 - Optimistic chat updates for better UX
 
-#### Backend (Application Layer)
+#### Server (Application Layer)
 
 - Express.js server
 - Plugin-based architecture for separation of concerns and future extensibility
