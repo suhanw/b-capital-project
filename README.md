@@ -132,6 +132,7 @@ The application uses OpenAI's GPT model for generating responses, with a abstrac
 
 ### Features
 
+- Polish the format of the AI responses
 - Add the ability to edit conversation titles
 - Add file upload support to enable multi-modal conversations
 - Add conversation export/sharing
