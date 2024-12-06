@@ -2,6 +2,9 @@
 
 https://chatbot-server-mi7w.onrender.com
 
+[Click here](https://www.loom.com/share/03533e70f01742759eae725439a4eaeb?sid=af205a46-37d8-4b65-91f5-02c66670509c) to see a quick demo.
+
+
 # Local development
 
 1. Make sure you have Docker installed and running.
