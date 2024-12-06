@@ -1,6 +1,7 @@
 const path = require("path");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isDevelopment =
   !process.env.NODE_ENV || process.env.NODE_ENV === "development";
@@ -45,6 +46,15 @@ const config = {
       fileName: "manifest.json",
       writeToFileEmit: true, // write to `dist` for server to consume
     }),
+    new CopyPlugin({
+      // copy static files to dist
+      patterns: [
+        {
+          from: path.resolve(__dirname, "./static"),
+          to: path.resolve(__dirname, "../dist"),
+        },
+      ],
+    }),
   ],
   devServer: isDevelopment
     ? {
@@ -55,6 +65,7 @@ const config = {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
+        static: path.resolve(__dirname, "./static"),
       }
     : undefined,
 };

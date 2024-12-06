@@ -39,6 +39,7 @@ services:
       MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@data:27017/chatbotdb?authSource=admin
       REDIS_URI: redis://default:${REDIS_PASSWORD}@cache:6379
       CLIENT_MANIFEST_URL: http://client:81/manifest.json # use container name to be accessible from another container
+      FAVICON_URL: http://localhost:81/favicon.ico
       COOKIE_SECRET: ${COOKIE_SECRET}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:
