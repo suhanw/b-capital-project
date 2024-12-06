@@ -15,10 +15,13 @@ const config = {
     errorDetails: isDevelopment,
   },
   target: "web",
-  entry: path.resolve(__dirname, "./src/index.tsx"),
+  entry: {
+    client: path.resolve(__dirname, "./src/index.tsx"),
+  },
   output: {
     path: path.resolve(__dirname, "../dist"),
-    filename: "client.js",
+    filename: "client" + (isDevelopment ? "" : ".[contenthash]") + ".js",
+    publicPath: process.env.CDN_URL,
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],

@@ -15,7 +15,7 @@ services:
     environment:
       NODE_ENV: production
       CLIENT_PORT: 81
-      CDN_URL: http://client:81
+      CDN_URL: http://localhost:81/ # need to be localhost to be accessible from browser
     command: ./node_modules/.bin/webpack serve --config client/webpack.js --compress --no-client-overlay --no-hot --no-live-reload --port 81 --allowed-hosts all
 
   server:
@@ -36,7 +36,7 @@ services:
       PORT: 80
       MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@data:27017/chatbotdb?authSource=admin
       REDIS_URI: redis://default:${REDIS_PASSWORD}@cache:6379
-      CLIENT_MANIFEST_URL: http://client:81/manifest.json
+      CLIENT_MANIFEST_URL: http://client:81/manifest.json # use container name to be accessible from another container
       COOKIE_SECRET: ${COOKIE_SECRET}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:

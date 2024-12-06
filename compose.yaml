@@ -16,7 +16,7 @@ services:
     environment:
       NODE_ENV: development
       CLIENT_PORT: 8080
-      CDN_URL: http://client:8080
+      CDN_URL: http://localhost:8080/
     command: npm run dev:client
 
   server:
@@ -38,7 +38,7 @@ services:
       PORT: 3000
       MONGODB_URI: mongodb://data:27017/chatbotdb
       REDIS_URI: redis://cache:6379
-      CLIENT_MANIFEST_URL: http://client:8080/manifest.json
+      CLIENT_MANIFEST_URL: http://client:8080/manifest.json # use container name to be accessible from another container
       COOKIE_SECRET: my-cookie-secret
       OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:
