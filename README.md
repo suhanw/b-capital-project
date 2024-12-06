@@ -70,8 +70,7 @@ The application uses OpenAI's GPT model for generating responses, with a abstrac
 
 #### Client (Frontend Layer)
 
-- React with TypeScript
-- Material-UI components
+- React with Material-UI components
 - Redux for global state management
 - Separate slices for data and UI states
 - Optimistic chat updates for better UX
