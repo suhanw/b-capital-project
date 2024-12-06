@@ -7,7 +7,11 @@ services:
     staticPublishPath: ./dist
     buildFilter:
       paths: # Only trigger a build with changes to these files
-      - client/**/*
+        - client/**/*
     envVars:
       - key: NODE_ENV
         value: production
+
+  - type: redis
+    name: chatbot-cache
+    ipAllowList: [] # Only allow internal connections
