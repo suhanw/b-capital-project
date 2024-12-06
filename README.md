@@ -7,7 +7,7 @@ https://chatbot-server-mi7w.onrender.com
 
 # Local development
 
-1. Make sure you have Docker installed and running.
+1. Make sure you have Docker installed and running
 
 2. Build and start Docker containers:
 
@@ -50,8 +50,8 @@ The application uses OpenAI's GPT model for generating responses, with a abstrac
 ### User Interface
 
 - Clean, modern Material-UI based design
-- Responsive layout with collapsible sidebar
-- Intuitive chat interface with message history, input area, new chat button, and conversation picker
+- Intuitive chat interface with message history and input area
+- Simple layout with collapsible sidebar to browse past chats
 
 ### UX Features
 
@@ -65,8 +65,10 @@ The application uses OpenAI's GPT model for generating responses, with a abstrac
 
 ### Project Structure
 
-- Modular architecture with clear separation of concerns and loose coupling (client, server, data, cache, and integrations)
-- TypeScript throughout for type safety
+- Modular architecture with clear separation of concerns 
+- Loosely coupled client, server, data, cache, and integration components 
+- TypeScript throughout for type safety and strong DevEx
+- Docker compose to simplify local environment setup
 - Consistent code style and formatting
 
 ### Three-Tier Architecture
