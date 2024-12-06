@@ -25,10 +25,16 @@ let store = new RedisStore({
   ttl: 1000 * 60 * 60 * 24,
 });
 
-console.log({
+const cookieOptions = {
+  signed: true,
+  httpOnly: true,
   secure: process.env.NODE_ENV === "production",
-  sameSite: "lax",
-});
+  maxAge: 1000 * 60 * 60 * 24,
+  path: "/",
+  sameSite: "lax" as const,
+};
+
+console.log({ cookieOptions });
 
 export class Auth {
   constructor(app: Application) {
@@ -38,16 +44,14 @@ export class Auth {
         secret: process.env.COOKIE_SECRET!,
         resave: false, // https://github.com/expressjs/session?tab=readme-ov-file#resave
         saveUninitialized: false, // https://github.com/expressjs/session?tab=readme-ov-file#saveuninitialized
-        cookie: {
-          signed: true,
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          maxAge: 1000 * 60 * 60 * 24,
-          path: "/",
-          sameSite: "lax",
-        },
+        cookie: cookieOptions,
       })
     );
+
+    if (process.env.NODE_ENV === "production") {
+      console.log("Setting trust proxy to 1");
+      app.set("trust proxy", 1);
+    }
 
     const router = Router();
     router.post("/signup", this.signup);
