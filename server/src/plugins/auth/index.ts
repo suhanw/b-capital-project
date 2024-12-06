@@ -34,8 +34,6 @@ const cookieOptions = {
   sameSite: "lax" as const,
 };
 
-console.log({ cookieOptions });
-
 export class Auth {
   constructor(app: Application) {
     app.use(
@@ -49,7 +47,7 @@ export class Auth {
     );
 
     if (process.env.NODE_ENV === "production") {
-      console.log("Setting trust proxy to 1");
+      // https://stackoverflow.com/a/75418142
       app.set("trust proxy", 1);
     }
 
