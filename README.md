@@ -84,7 +84,7 @@ The application uses OpenAI's GPT model for generating responses, with a abstrac
 
 #### Data Layer
 
-- MongoDB for conversation storage
+- MongoDB for user profile and conversation storage
 - Redis for session management
 - Repository design pattern to abstract data access logic from business logic
 
