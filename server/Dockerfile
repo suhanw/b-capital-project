@@ -46,7 +46,7 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /usr/src/app
 COPY ../package*.json ./
 # Install ONLY production dependencies
-RUN npm ci --production
+RUN npm ci --omit=dev
 # Copy the built server from the builder image.
 COPY --from=builder /usr/src/app/dist ./dist
 
