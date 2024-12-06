@@ -1,27 +1,185 @@
+# Project URL
+
+https://chatbot-server-mi7w.onrender.com
+
 # Local development
 
-1. Build and start Docker containers:
+1. Make sure you have Docker installed and running.
+
+2. Build and start Docker containers:
 
 ```
 npm start
 ```
 
-2. Monitor logs:
+3. Monitor logs:
 
 ```
 docker compose logs -f
 ```
 
-3. Tear down Docker containers:
+4. Tear down Docker containers:
 
 ```
 npm stop
 ```
 
-# Build and deploy
+# Overview
 
-Build the server:
+## Functionality
 
+### Core Features
+
+- Real-time chat interface with AI responses
+- User authentication (signup/login)
+- Conversation history management
+- Multi-session support
+- Persistent storage of conversations
+
+### AI Integration
+
+The application uses OpenAI's GPT model for generating responses, with a abstract `GenAIClient` interface to allow for future integrations with other AI providers:
+
+```typescript
+export interface GenAIClient {
+  generateResponse: (messages: IMessage[]) => Promise<any>;
+}
+
+export class OpenAIClient implements GenAIClient {
+  async generateResponse(messages: IMessage[]) {
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages,
+      });
+
+      return completion;
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+}
 ```
-docker build -f ./server/Dockerfile . -t server
+
+## Design and Usability
+
+### User Interface
+
+- Clean, modern Material-UI based design
+- Responsive layout with collapsible sidebar
+- Intuitive chat interface with message history, input area, new chat button, and conversation picker
+
+### UX Features
+
+- Real-time message updates
+- Auto-scroll to latest messages
+- Loading states during AI responses
+- Error handling with user-friendly messages
+- Persistent login sessions
+
+## Architecture Design
+
+### Project Structure
+
+- Modular architecture with clear separation of concerns and loose coupling (client, server, data, cache, and integrations)
+- TypeScript throughout for type safety
+- Consistent code style and formatting
+
+### Three-Tier Architecture
+
+#### Client (Frontend Layer)
+
+- React with TypeScript
+- Material-UI components
+- Redux for global state management
+- Separate slices for data and UI states
+- Optimistic chat updates for better UX
+
+#### Backend (Application Layer)
+
+- Express.js server
+- Plugin-based architecture for separation of concerns and future extensibility
+- Secure session management
+- RESTful API with auth and clear error responses
+
+#### Data Layer
+
+- MongoDB for conversation storage
+- Redis for session management
+- Repository design pattern to abstract data access logic from business logic
+
+#### Infrastructure
+
+- Docker containerization for easy deployment and scaling
+- Separate development and production configurations
+- Server and Redis are deployed to Render managed services
+- Client is deployed to Render static site which serves as CDN
+- MongoDB database deployed to MongoDB Atlas serverless
+
+## Security
+
+- Session-based authentication
+- Secure password hashing in data store
+
+### Session Management
+
+- Redis for temporary session storage
+- Secure cookie configuration
+
+```typescript
+const cookieOptions = {
+  signed: true,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  maxAge: 1000 * 60 * 60 * 24,
+  path: "/",
+  sameSite: "lax" as const,
+};
 ```
+
+### Infrastructure Security
+
+- Environment variable management (no secrets in the codebase)
+- Sanitized database URIs to avoid exposing credentials in logs
+
+## Scalability and Performance
+
+### Current Optimizations
+
+- Docker containerization for easy deployment and scaling
+- Redis store to enable caching capabilities
+- Webpack optimization for bundle size
+
+### Scalability Considerations
+
+- Loose coupling of data stores and application so each layer can be replaced easily or scaled independently
+- Choice of MongoDB for horizontal scalability and flexible model to accommodate multi-modal conversations
+- `render.yaml` configuration for scalable cloud deployment via Infrastructure-as-Code
+
+## If I had more time, I would work on these:
+
+### Features
+
+- Add file upload support to enable multi-modal conversations
+- Implement real-time notifications
+- Add conversation export
+- Integrate more AI providers (e.g., Google, Anthropic)
+
+### Performance
+
+- Unit, integration, and end-to-end testing
+- Database optimizations in conversation updates
+- Implement API rate limiting
+- Add request caching
+- Optimize client bundle sizes
+
+### Security
+
+- Implement API key rotation
+- Require app users to provide their own API keys
+
+### Monitoring
+
+- Implement o11y tools (e.g., Datadog)
+- Monitor compute/storage metrics, logs, and traces
