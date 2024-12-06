@@ -38,29 +38,7 @@ npm stop
 
 ### AI Integration
 
-The application uses OpenAI's GPT model for generating responses, with a abstract `GenAIClient` interface to allow for future integrations with other AI providers:
-
-```typescript
-export interface GenAIClient {
-  generateResponse: (messages: IMessage[]) => Promise<any>;
-}
-
-export class OpenAIClient implements GenAIClient {
-  async generateResponse(messages: IMessage[]) {
-    try {
-      const completion = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages,
-      });
-
-      return completion;
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
-  }
-}
-```
+The application uses OpenAI's GPT model for generating responses, with a abstract `GenAIClient` interface to allow for future integrations with other AI providers. 
 
 ## Design and Usability
 
@@ -127,16 +105,6 @@ export class OpenAIClient implements GenAIClient {
 - Redis for temporary session storage
 - Secure cookie configuration
 
-```typescript
-const cookieOptions = {
-  signed: true,
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  maxAge: 1000 * 60 * 60 * 24,
-  path: "/",
-  sameSite: "lax" as const,
-};
-```
 
 ### Infrastructure Security
 
