@@ -1,5 +1,6 @@
 const path = require("path");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 const isDevelopment =
   !process.env.NODE_ENV || process.env.NODE_ENV === "development";
@@ -36,11 +37,18 @@ const config = {
       },
     ],
   },
+  plugins: [
+    new WebpackManifestPlugin({
+      fileName: "manifest.json",
+      writeToFileEmit: true, // write to `dist` for server to consume
+    }),
+  ],
   devServer: isDevelopment
     ? {
         hot: false,
         liveReload: true,
         port: process.env.CLIENT_PORT,
+        allowedHosts: "all",
         headers: {
           "Access-Control-Allow-Origin": "*",
         },

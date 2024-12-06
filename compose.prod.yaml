@@ -15,10 +15,8 @@ services:
     environment:
       NODE_ENV: production
       CLIENT_PORT: 81
-    command: ./node_modules/.bin/webpack serve --config client/webpack.js --compress --no-client-overlay --no-hot --no-live-reload --port 81
-    depends_on:
-      server:
-        condition: service_started
+      CDN_URL: http://client:81
+    command: ./node_modules/.bin/webpack serve --config client/webpack.js --compress --no-client-overlay --no-hot --no-live-reload --port 81 --allowed-hosts all
 
   server:
     build:
@@ -38,10 +36,12 @@ services:
       PORT: 80
       MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@data:27017/chatbotdb?authSource=admin
       REDIS_URI: redis://default:${REDIS_PASSWORD}@cache:6379
-      CLIENT_BUNDLE_URL: http://localhost:81/client.js
+      CLIENT_MANIFEST_URL: http://client:81/manifest.json
       COOKIE_SECRET: ${COOKIE_SECRET}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:
+      client:
+        condition: service_started
       data:
         condition: service_healthy
       cache:

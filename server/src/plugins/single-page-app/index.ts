@@ -1,10 +1,24 @@
 import { Application } from "express";
 
-const CLIENT_BUNDLE_URL = process.env.CLIENT_BUNDLE_URL;
+async function getBundleCdnUrl() {
+  let url = `http://localhost:8080/client.js`;
+  try {
+    const manifest = await fetch(process.env.CLIENT_MANIFEST_URL!);
+    const manifestJson = await manifest.json();
+    url = manifestJson["client.js"];
+  } catch (error) {
+    console.error("Error loading manifest.json: ", {
+      CLIENT_MANIFEST_URL: process.env.CLIENT_MANIFEST_URL,
+      error,
+    });
+  }
+  return url;
+}
 
 export class SinglePageApp {
   constructor(app: Application) {
-    app.get("/", (req, res) => {
+    app.get("/", async (_, res) => {
+      const bundleCdnUrl = await getBundleCdnUrl();
       res.contentType("text/html").send(`
         <!DOCTYPE html>
         <html>
@@ -13,7 +27,7 @@ export class SinglePageApp {
           </head>
           <body>
             <div id="root"></div>
-            <script src="${CLIENT_BUNDLE_URL}"></script>
+            <script src="${bundleCdnUrl}"></script>
           </body>
         </html>
       `);

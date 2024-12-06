@@ -16,10 +16,8 @@ services:
     environment:
       NODE_ENV: development
       CLIENT_PORT: 8080
+      CDN_URL: http://client:8080
     command: npm run dev:client
-    depends_on:
-      server:
-        condition: service_started
 
   server:
     build:
@@ -40,10 +38,12 @@ services:
       PORT: 3000
       MONGODB_URI: mongodb://data:27017/chatbotdb
       REDIS_URI: redis://cache:6379
-      CLIENT_BUNDLE_URL: http://localhost:8080/client.js
+      CLIENT_MANIFEST_URL: http://client:8080/manifest.json
       COOKIE_SECRET: my-cookie-secret
       OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:
+      client:
+        condition: service_started
       data:
         condition: service_healthy
       cache:

@@ -6,6 +6,7 @@ const NodemonPlugin = require("nodemon-webpack-plugin");
 const isDevelopment =
   !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 
+console.log("bundling server");
 console.log({ isDevelopment });
 
 const config = {
