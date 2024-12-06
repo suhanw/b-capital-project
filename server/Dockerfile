@@ -34,7 +34,7 @@ COPY ../package*.json ./
 COPY --from=dependencies /usr/src/app/node_modules ./node_modules
 # Copy the rest of the source files into the image.
 COPY . .
-# Build the server
+# Build the server please
 RUN npm run build:server
 
 #Production image

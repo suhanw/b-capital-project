@@ -25,6 +25,11 @@ let store = new RedisStore({
   ttl: 1000 * 60 * 60 * 24,
 });
 
+console.log({
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",
+});
+
 export class Auth {
   constructor(app: Application) {
     app.use(
