@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../";
+import { getCurrentUserSuccess } from "../auth";
 
 interface IUiState {
   sideBarOpen: boolean;
@@ -17,6 +18,11 @@ export const uiSlice = createSlice({
     toggleSideBar: (state) => {
       state.sideBarOpen = !state.sideBarOpen;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(getCurrentUserSuccess, (state, action) => {
+      state.sideBarOpen = Boolean(action.payload);
+    });
   },
 });
 

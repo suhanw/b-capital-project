@@ -3,6 +3,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
+import Typography from "@mui/material/Typography";
 
 import {
   useGetConversationList,
@@ -15,6 +16,19 @@ function ConversationPicker() {
   const { conversationList } = useGetConversationList(isLoggedIn);
   const { currentConversationId, setCurrentConversationId } =
     useSetCurrentConversationId();
+
+  if (!conversationList.length) {
+    return (
+      <>
+        <Typography variant="h6" color="text.secondary" p="10px">
+          Start a new chat!
+        </Typography>
+        <Typography variant="body2" color="text.secondary" p="10px">
+          A history of our conversations will be listed here.
+        </Typography>
+      </>
+    );
+  }
 
   return (
     <List disablePadding>
