@@ -22,6 +22,7 @@ const userRepo: IUserRepo = new UserRepo();
 let store = new RedisStore({
   client: redisClient,
   prefix: "session:",
+  ttl: 1000 * 60 * 60 * 24,
 });
 
 export class Auth {

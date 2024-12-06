@@ -4,6 +4,9 @@ services:
       context: .
       dockerfile: ./client/Dockerfile
       target: dependencies # For development, use the dependencies stage
+      args:
+        NODE_ENV: development
+        CLIENT_PORT: 8080
     volumes:
       - ./client:/usr/src/app/client
       - /usr/src/app/node_modules
@@ -23,6 +26,9 @@ services:
       context: .
       dockerfile: ./server/Dockerfile
       target: dependencies # For development, use the dependencies stage
+      args:
+        NODE_ENV: development
+        PORT: 3000
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
@@ -34,6 +40,7 @@ services:
       PORT: 3000
       MONGODB_URI: mongodb://data:27017/chatbotdb
       REDIS_URI: redis://cache:6379
+      CLIENT_BUNDLE_URL: http://localhost:8080/client.js
       COOKIE_SECRET: my-cookie-secret
       OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:
