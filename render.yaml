@@ -32,13 +32,15 @@ services:
           name: chatbot-cache
           property: connectionString
       - key: MONGODB_URI
-        value: mongodb://data:27017/chatbotdb
+        sync: false # get value from dashboard
       - key: CLIENT_MANIFEST_URL
         value: https://chatbot-client-q9me.onrender.com/manifest.json
+      - key: FAVICON_URL
+        value: https://chatbot-client-q9me.onrender.com/favicon.ico
       - key: COOKIE_SECRET
-        sync: false # Prompt for a value in the Render Dashboard
+        sync: false # get value from dashboard
       - key: OPENAI_API_KEY
-        sync: false # Prompt for a value in the Render Dashboard
+        sync: false # get value from dashboard
 
   - type: redis
     name: chatbot-cache
