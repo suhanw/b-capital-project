@@ -12,13 +12,15 @@ https://chatbot-server-mi7w.onrender.com
 npm start
 ```
 
-3. Monitor logs:
+3. The service runs on `http://localhost:3000`.
+
+4. Monitor logs:
 
 ```
 docker compose logs -f
 ```
 
-4. Tear down Docker containers:
+5. Tear down Docker containers:
 
 ```
 npm stop
@@ -38,7 +40,7 @@ npm stop
 
 ### AI Integration
 
-The application uses OpenAI's GPT model for generating responses, with a abstract `GenAIClient` interface to allow for future integrations with other AI providers. 
+The application uses OpenAI's GPT model for generating responses, with a abstract `GenAIClient` interface to allow for future integrations with other AI providers.
 
 ## Design and Usability
 
@@ -104,7 +106,6 @@ The application uses OpenAI's GPT model for generating responses, with a abstrac
 
 - Redis for temporary session storage
 - Secure cookie configuration
-
 
 ### Infrastructure Security
 
