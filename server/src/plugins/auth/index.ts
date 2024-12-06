@@ -46,6 +46,7 @@ export class Auth {
     const router = Router();
     router.post("/signup", this.signup);
     router.post("/login", this.login);
+    router.delete("/logout", this.logout);
     router.get("/current_user", this.getCurrentUser);
     router.use(this.handleError);
 
@@ -89,6 +90,11 @@ export class Auth {
     } catch (err) {
       next(err);
     }
+  };
+
+  logout: RequestHandler = (req, res) => {
+    req.session.destroy(console.error);
+    res.sendStatus(204);
   };
 
   getCurrentUser: RequestHandler = (req, res) => {

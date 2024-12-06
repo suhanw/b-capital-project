@@ -7,8 +7,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import {
   useGetConversationList,
   useSetCurrentConversationId,
-} from "client/src/store/conversations";
-import { useCurrentUser } from "client/src/store/auth";
+} from "../../store/conversations";
+import { useCurrentUser } from "../../store/auth";
 
 function ConversationPicker() {
   const { isLoggedIn } = useCurrentUser();
@@ -44,16 +44,12 @@ function ConversationPickerItem({
         onClick={() => {
           setCurrentConversationId(_id);
         }}
-        sx={{
-          background: isSelected
-            ? theme.palette.grey[200]
-            : theme.palette.background.default,
-        }}
       >
         <ListItemText
           primary={title}
           sx={{
             "& .MuiListItemText-primary": {
+              fontWeight: isSelected ? 600 : 400,
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -64,9 +60,7 @@ function ConversationPickerItem({
                 top: 0,
                 bottom: 0,
                 width: 100,
-                background: isSelected
-                  ? `linear-gradient(to right, transparent, ${theme.palette.grey[200]})`
-                  : `linear-gradient(to right, transparent, ${theme.palette.background.default})`,
+                background: `linear-gradient(to right, transparent, ${theme.palette.secondary.main})`,
               },
             },
           }}

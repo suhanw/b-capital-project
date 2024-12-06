@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createSlice } from "@reduxjs/toolkit";
-import { getCurrentUserApi, loginApi, signupApi } from "../../api/auth";
+import {
+  getCurrentUserApi,
+  loginApi,
+  signupApi,
+  logoutApi,
+} from "../../api/auth";
 
 interface IAuthState {
   currentUser: { email: string; password: string } | null;
@@ -52,13 +57,14 @@ export function useLogin() {
   const dispatch = useDispatch();
   const [error, setError] = useState<any>(null);
 
-  const login = (email: string, password: string) => {
-    loginApi(email, password)
-      .then((response) => dispatch(getCurrentUserSuccess(response.data)))
-      .catch((error) => {
-        dispatch(getAuthError(error));
-        setError(error);
-      });
+  const login = async (email: string, password: string) => {
+    try {
+      const response = await loginApi(email, password);
+      dispatch(getCurrentUserSuccess(response.data));
+    } catch (error) {
+      dispatch(getAuthError(error));
+      setError(error);
+    }
   };
 
   const clearError = () => {
@@ -72,13 +78,14 @@ export function useSignup() {
   const dispatch = useDispatch();
   const [error, setError] = useState<any>(null);
 
-  const signup = (email: string, password: string) => {
-    signupApi(email, password)
-      .then((response) => dispatch(getCurrentUserSuccess(response.data)))
-      .catch((error) => {
-        dispatch(getAuthError(error));
-        setError(error);
-      });
+  const signup = async (email: string, password: string) => {
+    try {
+      const response = await signupApi(email, password);
+      dispatch(getCurrentUserSuccess(response.data));
+    } catch (error) {
+      dispatch(getAuthError(error));
+      setError(error);
+    }
   };
 
   const clearError = () => {
@@ -86,6 +93,21 @@ export function useSignup() {
   };
 
   return { signup, error, clearError };
+}
+
+export function useLogout() {
+  const dispatch = useDispatch();
+
+  const logout = async () => {
+    try {
+      await logoutApi();
+      dispatch(getCurrentUserSuccess(null));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return { logout };
 }
 
 export function useCurrentUser() {

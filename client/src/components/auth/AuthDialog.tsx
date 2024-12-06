@@ -1,5 +1,6 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
+import { blue } from "@mui/material/colors";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
@@ -47,8 +48,8 @@ function AuthDialogHeader({ loginView }: { loginView: boolean }) {
           margin: "30px auto 0px",
           padding: "10px",
           borderRadius: "50%",
-          background: theme.palette.primary.main,
-          color: theme.palette.primary.contrastText,
+          background: theme.palette.primary.dark,
+          color: theme.palette.primary.light,
         }}
       />
       {loginView ? (
@@ -67,18 +68,22 @@ function AuthDialogSwitcher({
   loginView: boolean;
   setLoginView: (loginView: boolean) => void;
 }) {
+  const theme = useTheme();
   return (
     <Box
       sx={{
+        height: "24px",
         marginTop: "10px",
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-end",
         "& .MuiButton-root": {
+          height: "100%",
           margin: 0,
           padding: 0,
           fontSize: "inherit",
           textTransform: "none",
+          color: theme.palette.info.main,
         },
       }}
     >
@@ -113,7 +118,7 @@ function PasswordField({
   const [showPassword, setShowPassword] = useState(false);
   return (
     <FormControl variant="outlined" required sx={{ marginTop: "10px" }}>
-      <InputLabel htmlFor={label} sx={{ background: "#fff" }}>
+      <InputLabel htmlFor={label} sx={{ background: "#fff" }} color="info">
         {label}
       </InputLabel>
       <OutlinedInput
@@ -121,6 +126,7 @@ function PasswordField({
         onChange={(e) => setPassword(e.target.value)}
         id={label}
         type={showPassword ? "text" : "password"}
+        color="info"
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -162,6 +168,8 @@ function AuthDialogForm({ loginView }: { loginView: boolean }) {
         variant="outlined"
         required
         type="email"
+        autoFocus
+        color="info"
         sx={{ marginTop: "10px" }}
       />
 
@@ -184,6 +192,7 @@ function AuthDialogForm({ loginView }: { loginView: boolean }) {
         size="large"
         sx={{ marginTop: "10px" }}
         type="submit"
+        color="info"
       >
         Continue
       </Button>

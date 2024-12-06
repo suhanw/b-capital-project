@@ -15,5 +15,6 @@ export const fetchWrapper = async (url: string, options?: RequestInit) => {
     const error = await response.text();
     throw error;
   }
-  return response.json();
+  // status 204 response has no body and will throw an error from json()
+  return response.json().catch(() => null);
 };

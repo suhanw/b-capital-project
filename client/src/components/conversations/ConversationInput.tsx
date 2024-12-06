@@ -8,7 +8,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import LinearProgress from "@mui/material/LinearProgress";
 import SendIcon from "@mui/icons-material/Send";
 
-import { useUpdateConversation } from "client/src/store/conversations";
+import { useUpdateConversation } from "../../store/conversations";
 
 function ConversationInput() {
   const theme = useTheme();
@@ -27,7 +27,10 @@ function ConversationInput() {
 
   return (
     <form onSubmit={sendMessage}>
-      {isLoading && <LinearProgress />}
+      {isLoading && (
+        <LinearProgress color="info" sx={{ width: "80%", margin: "0 auto" }} />
+      )}
+
       <FormHelperText error={!!error} sx={{ textAlign: "center" }}>
         {error}
       </FormHelperText>
@@ -53,19 +56,19 @@ function ConversationInput() {
             padding: "20px",
             borderRadius: "20px 20px 0 0",
             border: 0,
-            background: theme.palette.grey[100],
+            background: theme.palette.primary.main,
           }}
         />
         <Box
           sx={{
             display: "flex",
             justifyContent: "flex-end",
-            background: theme.palette.grey[100],
+            background: theme.palette.primary.main,
             borderRadius: "0 0 20px 20px",
             padding: "10px",
           }}
         >
-          <IconButton type="submit">
+          <IconButton type="submit" color="info" disabled={!content}>
             <SendIcon />
           </IconButton>
         </Box>

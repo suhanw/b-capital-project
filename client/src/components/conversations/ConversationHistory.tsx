@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 
-import { useGetCurrentConversation } from "client/src/store/conversations";
+import { useGetCurrentConversation } from "../../store/conversations";
 
 function ConversationHistory() {
   const theme = useTheme();

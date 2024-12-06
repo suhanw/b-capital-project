@@ -20,29 +20,34 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/api/auth/current_user HTTP/1.1
-Cookie: connect.sid=s%3AjYdHfwkOKBnl2flxu6IbeMICv4iFMdfv.9ZhEkBRTEkLprejbTODTIh3AOvd6ZKkgOu6zuYGNlv4;
+Cookie: connect.sid=s%3AZT4B_H34kDcxjSFSMT3sJRzma1wYvm0t.B9%2Fo9aVZsFZyArzm5%2BAUgXvmWo2KIFLKomKeEKxSuwU;
 
 ###
 
 POST http://localhost:3000/api/conversations HTTP/1.1
 Content-Type: application/json
-Cookie: connect.sid=s%3AjYdHfwkOKBnl2flxu6IbeMICv4iFMdfv.9ZhEkBRTEkLprejbTODTIh3AOvd6ZKkgOu6zuYGNlv4;
+Cookie: connect.sid=s%3AZT4B_H34kDcxjSFSMT3sJRzma1wYvm0t.B9%2Fo9aVZsFZyArzm5%2BAUgXvmWo2KIFLKomKeEKxSuwU;
 
 {
-  "title": "New Conversation",
-  "messages": []
+  "title": "New Conversation 4",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hello there, how are you?"
+    }
+  ]
 }
 
 ###
 
 GET http://localhost:3000/api/conversations HTTP/1.1
-Cookie: connect.sid=s%3AjYdHfwkOKBnl2flxu6IbeMICv4iFMdfv.9ZhEkBRTEkLprejbTODTIh3AOvd6ZKkgOu6zuYGNlv4;
+Cookie: connect.sid=s%3AZT4B_H34kDcxjSFSMT3sJRzma1wYvm0t.B9%2Fo9aVZsFZyArzm5%2BAUgXvmWo2KIFLKomKeEKxSuwU;
 
 ###
 
 PUT http://localhost:3000/api/conversations/674fea5dcbcbc3cb6902000d HTTP/1.1
 Content-Type: application/json
-Cookie: connect.sid=s%3AjYdHfwkOKBnl2flxu6IbeMICv4iFMdfv.9ZhEkBRTEkLprejbTODTIh3AOvd6ZKkgOu6zuYGNlv4;
+Cookie: connect.sid=s%3AZT4B_H34kDcxjSFSMT3sJRzma1wYvm0t.B9%2Fo9aVZsFZyArzm5%2BAUgXvmWo2KIFLKomKeEKxSuwU;
 
 {
   "title": "Updated Conversation",
@@ -57,4 +62,4 @@ Cookie: connect.sid=s%3AjYdHfwkOKBnl2flxu6IbeMICv4iFMdfv.9ZhEkBRTEkLprejbTODTIh3
 ###
 
 GET http://localhost:3000/api/conversations/674fea5dcbcbc3cb6902000d HTTP/1.1
-Cookie: connect.sid=s%3AjYdHfwkOKBnl2flxu6IbeMICv4iFMdfv.9ZhEkBRTEkLprejbTODTIh3AOvd6ZKkgOu6zuYGNlv4;
+Cookie: connect.sid=s%3AZT4B_H34kDcxjSFSMT3sJRzma1wYvm0t.B9%2Fo9aVZsFZyArzm5%2BAUgXvmWo2KIFLKomKeEKxSuwU;
