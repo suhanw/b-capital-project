@@ -39,8 +39,8 @@ const conversationsSlice = createSlice({
     setCurrentConversationId: (state, action) => {
       state.currentConversation = {
         _id: action.payload,
-        title: "",
-        messages: [],
+        title: state.currentConversation?.title || "New conversation",
+        messages: state.currentConversation?.messages || [],
       };
     },
     getCurrentConversationSuccess: (state, action) => {
