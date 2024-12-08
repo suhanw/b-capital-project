@@ -199,5 +199,11 @@ export const useUpdateConversation = () => {
     setError(null);
   };
 
-  return { updateConversation, error, clearError, isLoading };
+  return {
+    currentConversation,
+    error,
+    isLoading,
+    updateConversation,
+    clearError,
+  };
 };
